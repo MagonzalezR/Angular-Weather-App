@@ -1,0 +1,40 @@
+<div class="container">
+    <h1>Weather Forecast</h1>
+    
+    <div class="search-box">
+      <input 
+        type="text" 
+        [(ngModel)]="city" 
+        placeholder="Search a City"
+        (keyup.enter)="searchWeather()"
+      >
+      <button (click)="searchWeather()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z"/>
+        </svg>
+      </button>
+    </div>
+
+    <div class="forecast-container" *ngIf="forecasts.length">
+      <div class="forecast-card" *ngFor="let forecast of forecasts">
+        <div class="date">
+          {{ forecast.date | date:'EEEE dd/MM/yyyy, HH:mm ' }}
+        </div>
+        <div class="icon-container">
+          <span class="material-symbols-outlined">{{ forecast.icon }}</span>
+        </div>
+        <div class="temps">
+          <span class="max">{{ forecast.maxTemp }}°C</span>
+          <span class="separator">|</span>
+          <span class="min">{{ forecast.minTemp }}°C</span>
+        </div>
+        <!-- <div class="condition">
+          {{ forecast.condition }}
+        </div> -->
+      </div>
+    </div>
+
+    <div class="error" *ngIf="error">
+      {{ error }}
+    </div>
+  </div>
